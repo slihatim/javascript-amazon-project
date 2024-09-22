@@ -1,4 +1,4 @@
-import {cart, saveToLocalStorage} from '../data/cart.js';
+import {cart, saveToLocalStorage, updateCartQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let productsHTML = '';
@@ -81,15 +81,8 @@ function addToCart(productId){
     saveToLocalStorage();
 }
 
-function updateCartQuantity(){
-    let totalCartQuantity = 0;
-    cart.forEach((item) => {
-        totalCartQuantity += item.quantity;
-    })
-
-    document.querySelector('.js-cart-quantity').innerHTML = totalCartQuantity;
-}
-updateCartQuantity();
+//updating cart quantity
+updateCartQuantity('amazon');
 
 function addedText(productId){
     const added = document.querySelector(`.js-added-${productId}`);
@@ -108,7 +101,7 @@ document.querySelectorAll('.js-add-to-cart-button')
 
             addToCart(productId);
 
-            updateCartQuantity()
+            updateCartQuantity('amazon');
 
             addedText(productId);
 

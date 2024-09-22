@@ -9,3 +9,17 @@ export function removeFromCart(productId){
 export function saveToLocalStorage(){
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+export function updateCartQuantity(page){
+    let totalCartQuantity = 0;
+    cart.forEach((item) => {
+        totalCartQuantity += item.quantity;
+    })
+
+    if(page === 'amazon')
+        document.querySelector('.js-cart-quantity').innerHTML = totalCartQuantity;
+    
+    if(page === 'checkout')
+        document.querySelector('.js-return-to-home-link').innerHTML = totalCartQuantity + ' items';
+
+}
