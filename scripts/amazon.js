@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, saveToLocalStorage} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let productsHTML = '';
@@ -77,6 +77,8 @@ function addToCart(productId){
             quantity: quantity
         })
     }
+
+    saveToLocalStorage();
 }
 
 function updateCartQuantity(){
@@ -87,6 +89,7 @@ function updateCartQuantity(){
 
     document.querySelector('.js-cart-quantity').innerHTML = totalCartQuantity;
 }
+updateCartQuantity();
 
 function addedText(productId){
     const added = document.querySelector(`.js-added-${productId}`);

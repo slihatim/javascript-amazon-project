@@ -1,4 +1,4 @@
-import {cart, removeFromCart} from '../data/cart.js';
+import {cart, removeFromCart, saveToLocalStorage} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let cartItemsHTML = '';
@@ -96,5 +96,6 @@ document.querySelectorAll('.js-delete-quantity-link').forEach((link) => {
 
     //update the html
     document.querySelector(`.js-cart-item-container-${link.dataset.productId}`).remove();
+
   })
 })
