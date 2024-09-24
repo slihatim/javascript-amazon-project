@@ -23,3 +23,11 @@ export function updateCartQuantity(page){
         document.querySelector('.js-return-to-home-link').innerHTML = totalCartQuantity + ' items';
 
 }
+
+export function updateQuantity(productId, newQuantity){
+    const matchingCartItem = cart.find((cartItem) => cartItem.productId === productId);
+    matchingCartItem.quantity = newQuantity;
+
+    //updating localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
