@@ -31,3 +31,11 @@ export function updateQuantity(productId, newQuantity){
     //updating localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+export function updateDeliveryOption(productId, deliveryOptionId){
+    const matchingCartItem = cart.find((cartItem) => cartItem.productId === productId);
+    matchingCartItem.deliveryOptionId = deliveryOptionId;
+
+    //updating localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+}

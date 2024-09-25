@@ -1,4 +1,4 @@
-import {cart, removeFromCart, saveToLocalStorage, updateCartQuantity, updateQuantity} from '../data/cart.js';
+import {cart, removeFromCart, saveToLocalStorage, updateCartQuantity, updateDeliveryOption, updateQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions } from '../data/deliveryOptions.js';
@@ -13,7 +13,7 @@ cart.forEach((cartItem) => {
 
     const html = `
         <div class="cart-item-container js-cart-item-container-${product.id}">
-            <div class="delivery-date">
+            <div class="delivery-date js-delivery-date-${product.id}">
               Delivery date: ${dateString}
             </div>
 
@@ -119,7 +119,8 @@ function deliveryOptionsHTML(productId, cartItem){
     const isChecked = cartItem.deliveryOptionId === option.id;
 
     html += `
-      <div class="delivery-option">
+      <div class="delivery-option js-delivery-option"
+      data-product-id="${productId}" data-delivery-option-id="${option.id}">
         <input type="radio" ${isChecked ? 'checked' : ''}
           class="delivery-option-input"
           name="delivery-option-${productId}">
@@ -136,3 +137,18 @@ function deliveryOptionsHTML(productId, cartItem){
   })
   return html;
 }
+
+//updating the delivery options
+document.querySelectorAll('.js-delivery-option').forEach((div) => {
+  div.addEventListener('click', () => {
+    const {productId, deliveryOptionId} = div.dataset;
+    updateDeliveryOption(productId, deliveryOptionId);
+
+    //updating the main delivery date of the cart item
+    const deliveryDays = deliveryOptions.find((option) => option.id === deliveryOptionId).deliveryDays;
+
+    const dateString = dayjs().add(deliveryDays, 'day').format('dddd, MMMM D');
+
+    document.querySelector(`.js-delivery-date-${productId}`).innerHTML = `Delivery date: ${dateString}`;
+  })
+})
