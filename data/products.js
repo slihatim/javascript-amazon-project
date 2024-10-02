@@ -13,6 +13,10 @@ class Product{
     this.priceCents = productDetails.priceCents;
   }
 
+  formatedPrice(){
+    return (this.priceCents/100).toFixed(2);
+  }
+
 }
 
 export const products = [

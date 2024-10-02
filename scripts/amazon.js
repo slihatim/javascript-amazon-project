@@ -25,7 +25,7 @@ products.forEach((product) => {
             </div>
 
             <div class="product-price">
-                $${(product.priceCents/100).toFixed(2)}
+                $${product.formatedPrice()}
             </div>
 
             <div class="product-quantity-container">
