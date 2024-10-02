@@ -3,6 +3,7 @@ import {products} from '../data/products.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions } from '../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
+import '../data/cart-class.js';
 
 function renderOrderSummary(){
   let cartItemsHTML = '';
