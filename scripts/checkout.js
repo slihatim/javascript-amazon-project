@@ -4,9 +4,17 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions } from '../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 // import '../data/cart-class.js';
-// import '../data/backend-practice.js';
+import '../data/backend-practice.js';
+import { loadProducts } from '../data/products.js';
 
-function renderOrderSummary(){
+Promise.all([
+  loadProducts()
+]).then((values) => {
+  renderOrderSummary();
+  renderPaymentSummary();
+})
+
+export function renderOrderSummary(){
   let cartItemsHTML = '';
   cart.forEach((cartItem) => {
       const product = products.find((product) => product.id === cartItem.productId);
@@ -160,7 +168,7 @@ function renderOrderSummary(){
   })
 }
 
-renderOrderSummary();
+// renderOrderSummary();
 
 //payment summary
-renderPaymentSummary();
+// renderPaymentSummary();
