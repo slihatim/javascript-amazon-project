@@ -8,10 +8,14 @@ import '../data/backend-practice.js';
 import { loadProducts } from '../data/products.js';
 
 async function loadPage(){
-  await loadProducts();
+  try {
+    await loadProducts();
 
-  renderOrderSummary();
-  renderPaymentSummary();
+    renderOrderSummary();
+    renderPaymentSummary();
+  } catch(error){
+    console.log(error);
+  }
 }
 
 loadPage();

@@ -2,11 +2,13 @@ import {cart, saveToLocalStorage, updateCartQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {loadProducts} from '../data/products.js';
 
-Promise.all([
-    loadProducts()
-]).then((values) => {
+async function loadPage(){
+    await loadProducts();
+
     renderProductsGrid();
-})
+}
+
+loadPage();
 
 function renderProductsGrid(){
     let productsHTML = '';

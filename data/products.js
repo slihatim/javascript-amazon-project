@@ -54,7 +54,10 @@ export function loadProducts(){
       return new Product(productDetails);
     });
 
-  })
+  })/*.catch((error) => {
+    console.log('an error has occured, please try again');
+    console.log(error);
+  })*/
 
   return promise;
 }
