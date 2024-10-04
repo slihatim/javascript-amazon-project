@@ -7,12 +7,15 @@ import { renderPaymentSummary } from './paymentSummary.js';
 import '../data/backend-practice.js';
 import { loadProducts } from '../data/products.js';
 
-Promise.all([
-  loadProducts()
-]).then((values) => {
+async function loadPage(){
+  await loadProducts();
+
   renderOrderSummary();
   renderPaymentSummary();
-})
+}
+
+loadPage();
+
 
 export function renderOrderSummary(){
   let cartItemsHTML = '';
