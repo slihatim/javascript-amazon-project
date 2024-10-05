@@ -1,9 +1,26 @@
 import {cart, saveToLocalStorage, updateCartQuantity} from '../data/cart.js';
-import {products} from '../data/products.js';
+import {products as allProducts} from '../data/products.js';
 import {loadProducts} from '../data/products.js';
+
+let products = [];
 
 async function loadPage(){
     await loadProducts();
+
+    //when loading the page, check for url params
+    const url = new URL(location.href);
+    const param = url.searchParams.get('search');
+    console.log(param);
+    if(param){
+        products = allProducts.filter((product) => {
+            if(product.name.toLowerCase().includes(param.toLowerCase()) 
+                || product.keywords.map(keyword => keyword.toLowerCase()).includes(param.toLowerCase()))
+                return true;
+            return false;
+        });
+    } else {
+        products = [...allProducts];
+    }
 
     renderProductsGrid();
 }
@@ -119,5 +136,16 @@ function renderProductsGrid(){
                 addedText(productId);
 
             })
-        })
+        });
+
+    //search feature
+    
+    const searchButton = document.querySelector('.js-search-button');
+
+    searchButton.addEventListener('click', () => {
+        const searchInputValue = document.querySelector('.js-search-bar').value;
+
+        location.href = `amazon.html?search=${searchInputValue}`;
+        
+    })
 }
