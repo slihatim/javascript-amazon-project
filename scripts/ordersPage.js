@@ -40,7 +40,7 @@ function renderOrdersGrid(){
                 </div>
 
                 <div class="order-details-grid">
-                    ${order.products.map(product => generateProductHTML(product)).join('')}
+                    ${order.products.map(product => generateProductHTML(product, order.id)).join('')}
 
                     
                 </div>
@@ -52,7 +52,7 @@ function renderOrdersGrid(){
 
     ordersGrid.innerHTML = html;
 
-    function generateProductHTML(product){
+    function generateProductHTML(product, orderId){
         const arrivingDate = dayjs(product.estimatedDeliveryTime).format('MMMM D');
         let html = `
             <div class="product-image-container">
@@ -76,7 +76,7 @@ function renderOrdersGrid(){
             </div>
 
             <div class="product-actions">
-                <a href="tracking.html">
+                <a href="tracking.html?orderId=${orderId}&productId=${product.productId}">
                     <button class="track-package-button button-secondary">
                     Track package
                     </button>
