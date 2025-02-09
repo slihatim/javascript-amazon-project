@@ -80,6 +80,8 @@ export function renderPaymentSummary(){
     
                 addOrder(orderObject);
 
+                localStorage.removeItem('cart');
+
                 window.location.href = 'orders.html';
             } catch(error){
                 console.log(error);
